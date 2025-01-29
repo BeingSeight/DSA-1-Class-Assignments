@@ -1,102 +1,89 @@
 // Pop Stack without class
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-const int MAX=5;
-int st[MAX],top=-1;
-void push(int st[], int val);
-int pop(int st[]);
-int peek(int st[]);
-void display(int st[]);
-int main(){
-    int val, option;
-    do{
-        cout<<"\n ***** MAIN MENU *****";
-        cout<<"\n 1. PUSH";
-        cout<<"\n 2. POP";
-        cout<<"\n 3. PEEK";
-        cout<<"\n 4. DISPLAY";
-        cout<<"\n 5. EXIT";
-        cout<<"\n Enter your option: ";
-        cin>>option;
+#define MAX 1000
 
-        switch(option)
-        {
-            case 1:
-                cout<<"Enter the value to be pushed: ";
-                cin>>val;
-                push(st, val);
-                break;
-            case 2:
-                val = pop(st);
-                if (val != -1)
-                    cout<<"The value popped is: "<<val;
-                break;
-            case 3:
-                val = peek(st);
-                if (val != -1)
-                    cout<<"The value at the top is: "<<val;
-                break;
-            case 4:
-                display(st);
-                break;
-        }
-    } while(option != 5);
-    return 0;
-}
+int st[MAX];
+int top = -1;
 
-int pop(int st[])
-{
-    if (top == -1)
-    {
-        cout<<"Stack is empty, STACK UNDERFLOW";
-        return -1;
-    }
-    else
-    {
-        int val = st[top];
-        top--;
-        return val;
+void push(int x) {
+    if (top >= (MAX - 1)) {
+        cout << "Stack Overflow\n";
+    } else {
+        st[++top] = x;
+        cout << x << " pushed into stack\n";
     }
 }
 
-void push (int st[],int val)
-{
-    if (top == MAX-1)
-    {
-        cout<<"Stack is full, STACK OVERFLOW";
-    }
-    else {
-        top ++;
-        st[top]=val;
+int pop() {
+    if (top < 0) {
+        cout << "Stack Underflow\n";
+        return 0;
+    } else {
+        int x = st[top--];
+        return x;
     }
 }
 
-int peek(int st[])
-{
-    if (top == -1)
-    {
-        cout<<"Stack is empty, STACK UNDERFLOW";
-        return -1;
-    }
-    else
-    {
+int peek() {
+    if (top < 0) {
+        cout << "Stack is Empty\n";
+        return 0;
+    } else {
         return st[top];
     }
 }
 
-void display(int st[])
-{
-    if (top == -1)
-    {
-        cout<<"Stack is empty, STACK UNDERFLOW";
+bool isEmpty() {
+    return (top < 0);
+}
+
+void display() {
+    if (top == -1) {
+        cout << "Stack is empty, STACK UNDERFLOW\n";
+    } else {
+        for (int i = top; i >= 0; i--) {
+            cout << st[i] << " ";
+        }
+        cout << endl;
     }
-    else
-    {
-        for (int i = top; i >= 0; i--)
-        {
-            cout<<st[i]<<" ";
+}
+
+int main() {
+    int choice, value;
+
+    while (true) {
+        cout << "\n ***** MAIN MENU *****";
+        cout << "\n 1. PUSH";
+        cout << "\n 2. POP";
+        cout << "\n 3. PEEK";
+        cout << "\n 4. DISPLAY";
+        cout << "\n 5. EXIT";
+        cout << "\n Enter your option: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the value to be pushed: ";
+                cin >> value;
+                push(value);
+                break;
+            case 2:
+                cout << "Popped value: " << pop() << endl;
+                break;
+            case 3:
+                cout << "Top value: " << peek() << endl;
+                break;
+            case 4:
+                display();
+                break;
+            case 5:
+                exit(0);
+            default:
+                cout << "Invalid choice, please try again.\n";
         }
     }
+    return 0;
 }

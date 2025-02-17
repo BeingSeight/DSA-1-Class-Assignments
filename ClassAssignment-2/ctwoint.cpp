@@ -10,7 +10,7 @@ int main() {
 
     cout << "Before swapping: a = " << a << ", b = " << b << endl;
 
-    // Use pointers to swap the values
+
     int *p1 = &a, *p2 = &b;
     int temp = *p1;
     *p1 = *p2;

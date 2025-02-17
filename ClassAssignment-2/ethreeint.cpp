@@ -8,7 +8,7 @@ int main() {
     cout << "Enter three numbers: ";
     cin >> a >> b >> c;
 
-    // Use pointers to compare the values
+
     int *p1 = &a, *p2 = &b, *p3 = &c;
     if (*p1 > *p2) {
         if (*p1 > *p3) {
